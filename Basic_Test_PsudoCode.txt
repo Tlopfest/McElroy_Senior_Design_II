@@ -1,0 +1,33 @@
+#include <stdio.h>
+
+/**NOTE: All code in this file is effectively psudo-code.
+Copy-pasting this into the actual IDE will
+not allow the code to compile or work at all.
+*/
+
+#define REF_VOLT ###; //Put 146 chip Reference voltage here
+
+int led=0;
+
+void Power_LED(int test){
+  if (test)
+    //Power LED via I/O pins;
+  else
+    //Disable power to LED via I/O pins;
+}
+
+int ADC_Reader(){
+  float input = //Access ADC;
+  float voltage = (input/2^12)*REF_VOLT; //Convert to actual voltage value.
+  final_voltage = (int)(voltage+0.5); //Set voltage to int
+  return final_voltage;
+}
+
+void main{
+  int input = ADC_Reader();
+  if (input % 2 == 0)
+    led=1;
+  else
+    led=0;
+  Power_LED(led);
+}
