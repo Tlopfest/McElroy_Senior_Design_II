@@ -1,0 +1,16 @@
+-T
+"/home/tlopfest/Documents/S32_Workspace/Full_ADC_CAN_Code/Project_Settings/Linker_Files/S32K144_64_flash.ld"
+-Wl,-Map,"Full_ADC_CAN_Code.map"
+-Xlinker
+--gc-sections
+-n
+-mcpu=cortex-m4
+-specs=nosys.specs
+--sysroot="/home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib"
+"./Project_Settings/Startup_Code/startup.o"
+"./Project_Settings/Startup_Code/startup_S32K144.o"
+"./Project_Settings/Startup_Code/system_S32K144.o"
+"./include/ADC.o"
+"./include/FlexCAN.o"
+"./include/clocks_and_modes.o"
+"./src/main.o"
