@@ -31,6 +31,9 @@ void PORT_init (void) {
 	PTD->PDDR |= 1<<PTD0; /* Port D0: Data Direction= output */
 	PTD->PDDR |= 1<<PTD15; /* Port D15: Data Direction= output */
 	PTD->PDDR |= 1<<PTD16; /* Port D16: Data Direction= output */
+	PCC->PCCn[PCC_PORTE_INDEX] |= PCC_PCCn_CGC_MASK; /* Enable clock for PORTE */
+	PORTE->PCR[4] |= PORT_PCR_MUX(5); /* Port E4: MUX = ALT5, CAN0_RX */
+	PORTE->PCR[5] |= PORT_PCR_MUX(5); /* Port E5: MUX = ALT5, CAN0_TX */
 }
 
 void WDOG_disable(void){
@@ -57,7 +60,7 @@ void Power_LED(int test){
 //	}
 //}
 
-unsigned char int_to_hex(uint32_t value){
+char int_to_hex(uint32_t value){
 	int temp=0;
 	while (value > 0){
 		switch(value%16){
@@ -85,33 +88,49 @@ unsigned char int_to_hex(uint32_t value){
 		value=value/16;
 		temp++;
 		}
-	return hex;
+	return &hex;
 }
 
 int main(void){
 	WDOG_disable();
-	FLEXCAN0_init();
 	SOSC_init_8MHz(); /* Initialize system oscillator for 8 MHz xtal */
 	SPLL_init_160MHz(); /* Initialize SPLL to 160 MHz with 8 MHz SOSC */
 	NormalRUNmode_80MHz(); /* Init clocks: 80 MHz sysclk & core, 40 MHz bus, 20 MHz flash */
+	FLEXCAN0_init();
 	PORT_init(); /* Init port clocks and gpio outputs */
 	ADC_init();
 	for(;;) {
-		convertAdcChan(RTD_PORT); /* Convert Channel AD12 to pot on EVB */ //WILL NEED TO SET CORRECT PORT LATER
+		convertAdcChan(12); /* Convert Channel AD12 to pot on EVB */ //WILL NEED TO SET CORRECT PORT LATER
 		while(adc_complete()==0){} /* Wait for conversion complete flag */
 		input_1 = read_adc_chx();
-		convertAdcChan(RTD_PORT2);
-		while(adc_complete()==0){}
-		input_2 = read_adc_chx();/* Get channel's conversion results in mv */
+		if (input_1 > 3750) { /* If result > 3.75V */
+			PTD->PSOR |= 1<<PTD0 | 1<<PTD16; /* turn off blue, green LEDs */
+			PTD->PCOR |= 1<<PTD15; /* turn on red LED */
+		}
+		else if (input_1 > 2500) { /* If result > 3.75V */
+			PTD->PSOR |= 1<<PTD0 | 1<<PTD15; /* turn off blue, red LEDs */
+			PTD->PCOR |= 1<<PTD16; /* turn on green LED */
+		}
+		else if (input_1 >1250) { /* If result > 3.75V */
+			PTD->PSOR |= 1<<PTD15 | 1<<PTD16; /* turn off red, green LEDs */
+			PTD->PCOR |= 1<<PTD0; /* turn on blue LED */
+		}
+		else {
+			PTD->PSOR |= 1<<PTD0 | 1<< PTD15 | 1<<PTD16; /* Turn off all LEDs */
+		}
+		//convertAdcChan(RTD_PORT2);
+		//while(adc_complete()==0){}
+		//input_2 = read_adc_chx();/* Get channel's conversion results in mv */
+		input_2=input_1; //TEMP FOR POTENTIIOMETER TESTING
 		avg = (input_1+input_2)/2;
 		//final_input = temp_finder(avg/1000);
 		final_input=avg/1000; //TEMP UNTIL temp_finder IS SETUP
-		unsigned char msg1 = int_to_hex(final_input);
-		unsigned char msg2 = msg1;
+		char msg1 = int_to_hex(final_input);
+		char msg2 = msg1;
 		//convertAdcChan(29); /* Convert chan 29, Vrefsh */
 		//while(adc_complete()==0){} /* Wait for conversion complete flag */
 		//adcResultInMv_Vrefsh = read_adc_chx(); /* Get channel's conversion results in mv */
-		/*THE FOLLOWING IS PSUDOCODE DUE TO CAN STILL NOT WORKING PROPERLY */
+		//FLEXCAN0_transmit_msg_test();
 		FLEXCAN0_transmit_msg(msg1, msg2);
 		}
 	}
