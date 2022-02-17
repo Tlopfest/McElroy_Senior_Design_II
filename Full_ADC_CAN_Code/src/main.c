@@ -60,37 +60,6 @@ void Power_LED(int test){
 //	}
 //}
 
-char int_to_hex(uint32_t value){
-	int temp=0;
-	while (value > 0){
-		switch(value%16){
-		case 10:
-			hex[temp]='A';
-			break;
-		case 11:
-			hex[temp]='B';
-			break;
-		case 12:
-			hex[temp]='C';
-			break;
-		case 13:
-			hex[temp]='D';
-			break;
-		case 14:
-			hex[temp]='E';
-			break;
-		case 15:
-			hex[temp]='F';
-			break;
-		default:
-			hex[temp]=(value%16)+0x30;
-		}
-		value=value/16;
-		temp++;
-		}
-	return &hex;
-}
-
 int main(void){
 	WDOG_disable();
 	SOSC_init_8MHz(); /* Initialize system oscillator for 8 MHz xtal */
@@ -124,13 +93,12 @@ int main(void){
 		input_2=input_1; //TEMP FOR POTENTIIOMETER TESTING
 		avg = (input_1+input_2)/2;
 		//final_input = temp_finder(avg/1000);
-		final_input=avg/1000; //TEMP UNTIL temp_finder IS SETUP
-		char msg1 = int_to_hex(final_input);
-		char msg2 = msg1;
+		final_input=avg; //TEMP UNTIL temp_finder IS SETUP
 		//convertAdcChan(29); /* Convert chan 29, Vrefsh */
 		//while(adc_complete()==0){} /* Wait for conversion complete flag */
 		//adcResultInMv_Vrefsh = read_adc_chx(); /* Get channel's conversion results in mv */
 		//FLEXCAN0_transmit_msg_test();
-		FLEXCAN0_transmit_msg(msg1, msg2);
+		FLEXCAN0_transmit_msg_RTDs(input_1, input_2);
+		FLEXCAN0_transmit_msg_AVG(final_input, 0);
 		}
 	}
