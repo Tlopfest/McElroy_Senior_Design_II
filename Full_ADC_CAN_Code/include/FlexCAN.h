@@ -10,7 +10,7 @@
 void FLEXCAN0_init(void);
 void FLEXCAN0_transmit_msg_test(void);
 void FLEXCAN0_receive_msg_test(void);
-void FLEXCAN0_transmit_msg_RTDs(int msg1, int msg2);
-void FLEXCAN0_transmit_msg_AVG(int msg1, int msg2);
+void FLEXCAN0_transmit_msg_RTDs(uint32_t msg1, uint32_t msg2);
+void FLEXCAN0_transmit_msg_AVG(uint32_t msg1, uint32_t msg2);
 
 #endif /* FLEXCAN_H_ */

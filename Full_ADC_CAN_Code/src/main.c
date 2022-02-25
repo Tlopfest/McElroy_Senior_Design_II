@@ -62,6 +62,32 @@ void Power_LED(int test){
 //	}
 //}
 
+uint32_t averager(uint32_t value1[100]){
+	uint32_t value2=0;
+	for(int temp=0; temp<100; temp++){
+		value2 = value2 + value1[temp];
+	}
+	return value2/100;
+}
+
+void FLEXCAN0_Tester(void){
+	FLEXCAN0_transmit_msg_AVG(0xFFFFFFFF+1, -1);
+	FLEXCAN0_transmit_msg_AVG(123, 456);
+}
+
+void averager_Tester(void){
+	uint32_t test1[100];
+	uint32_t limit = 4294967295;
+	for(int tmp=0;tmp<100;tmp++)
+		test1[tmp]=limit;
+	uint32_t test2[100];
+	for(int tmp=0;tmp<100;tmp++){
+		test2[tmp]=tmp;
+	}
+	uint32_t test_1_avg = averager(test1);
+	uint32_t test_2_avg = averager(test2);
+}
+
 int main(void){
 	WDOG_disable();
 	SOSC_init_8MHz(); /* Initialize system oscillator for 8 MHz xtal */
@@ -70,6 +96,8 @@ int main(void){
 	FLEXCAN0_init();
 	PORT_init(); /* Init port clocks and gpio outputs */
 	ADC_init();
+	FLEXCAN0_Tester();
+	averager_Tester();
 	for(;;) {
 		convertAdcChan(12); /* Convert Channel AD12 to pot on EVB */ //WILL NEED TO SET CORRECT PORT LATER
 		while(adc_complete()==0){} /* Wait for conversion complete flag */
@@ -97,14 +125,8 @@ int main(void){
 			counter++;
 		}
 		else{
-			for(int temp=0; temp<100; temp++){
-				input_1_avg = input_1_avg + input_1[temp];
-			}
-			input_1_avg = input_1_avg/100;
-			for(int temp=0; temp<100; temp++){
-				input_2_avg = input_2_avg + input_2[temp];
-			}
-			input_2_avg = input_2_avg/100;
+			input_1_avg = averager(input_1);
+			input_2_avg = averager(input_2);
 			counter=0;
 			avg = (input_1_avg+input_2_avg)/2;
 			//final_input = temp_finder(avg/1000);

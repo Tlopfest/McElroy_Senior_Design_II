@@ -69,7 +69,7 @@ void FLEXCAN0_transmit_msg_test(void) { /* Assumption: Message buffer CODE is IN
 	/* RTR = 0: data, not remote tx request frame*/
 	/* DLC = 8 bytes */
 }
-void FLEXCAN0_transmit_msg_RTDs(int msg1, int msg2) { /* Assumption: Message buffer CODE is INACTIVE */
+void FLEXCAN0_transmit_msg_RTDs(uint32_t msg1, uint32_t msg2) { /* Assumption: Message buffer CODE is INACTIVE */
 	CAN0->IFLAG1 = 0x00000001; /* Clear CAN 0 MB 0 flag without clearing others*/
 	CAN0->RAMn[ 0*MSG_BUF_SIZE + 2] = msg1; /* MB0 word 2: data word 0 */
 	CAN0->RAMn[ 0*MSG_BUF_SIZE + 3] = msg2; /* MB0 word 3: data word 1 */
@@ -83,7 +83,7 @@ void FLEXCAN0_transmit_msg_RTDs(int msg1, int msg2) { /* Assumption: Message buf
 	/* DLC = 8 bytes */
 }
 
-void FLEXCAN0_transmit_msg_AVG(int msg1, int msg2) { /* Assumption: Message buffer CODE is INACTIVE */
+void FLEXCAN0_transmit_msg_AVG(uint32_t msg1, uint32_t msg2) { /* Assumption: Message buffer CODE is INACTIVE */
 	CAN0->IFLAG1 = 0x00000001; /* Clear CAN 0 MB 0 flag without clearing others*/
 	CAN0->RAMn[ 0*MSG_BUF_SIZE + 2] = msg1; /* MB0 word 2: data word 0 */
 	CAN0->RAMn[ 0*MSG_BUF_SIZE + 3] = msg2; /* MB0 word 3: data word 1 */
