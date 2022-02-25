@@ -71,8 +71,8 @@ uint32_t averager(uint32_t value1[100]){
 }
 
 void FLEXCAN0_Tester(void){
-	FLEXCAN0_transmit_msg_AVG(0xFFFFFFFF+1, -1);
-	FLEXCAN0_transmit_msg_AVG(123, 456);
+	FLEXCAN0_transmit_msg_AVG(0xFFFFFFFF+1, -1); //Output should be 00 00 00 00 FF FF FF FF
+	FLEXCAN0_transmit_msg_AVG(123, 456); //Output should be 00 00 00 00 7B 00 00 01 C8
 }
 
 void averager_Tester(void){
@@ -84,8 +84,8 @@ void averager_Tester(void){
 	for(int tmp=0;tmp<100;tmp++){
 		test2[tmp]=tmp;
 	}
-	uint32_t test_1_avg = averager(test1);
-	uint32_t test_2_avg = averager(test2);
+	uint32_t test_1_avg = averager(test1); //Output should be 42949671
+	uint32_t test_2_avg = averager(test2); //Output should be 49
 }
 
 int main(void){
