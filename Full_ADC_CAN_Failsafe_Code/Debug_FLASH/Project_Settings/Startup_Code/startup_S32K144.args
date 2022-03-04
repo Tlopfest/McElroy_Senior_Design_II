@@ -1,0 +1,8 @@
+-c
+-I"/home/tlopfest/Documents/S32_Workspace/Full_ADC_CAN_Failsafe_Code/include"
+-x assembler-with-cpp
+-DSTART_FROM_FLASH
+-g3
+-mcpu=cortex-m4
+-specs=nosys.specs
+--sysroot="/home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib"
