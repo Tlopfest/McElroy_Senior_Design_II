@@ -96,7 +96,7 @@ void FLEXCAN0_transmit_msg_AVG(uint32_t msg1, uint32_t msg2) { /* Assumption: Me
 	/* RTR = 0: data, not remote tx request frame*/
 	/* DLC = 8 bytes */
 }
-int FLEXCAN0_receive_msg(void) { /* Receive msg from ID 0x556 using msg buffer 4 */
+void FLEXCAN0_receive_msg(void) { /* Receive msg from ID 0x556 using msg buffer 4 */
 	uint8_t j;
 	uint32_t dummy;
 	RxCODE = (CAN0->RAMn[ 4*MSG_BUF_SIZE + 0] & 0x07000000) >> 24; /* Read CODE field */

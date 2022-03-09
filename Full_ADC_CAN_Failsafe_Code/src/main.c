@@ -55,15 +55,26 @@ void Power_LED(int test){
 }
 
 uint32_t temp_finder(uint32_t voltage){
-	int dummy=0; //Place for formula to find temperature
+	int temperature = slope*voltage+intercept; //Place for formula to find temperature
+}
+
+uint32_t averager(uint32_t value1[100]){
+	uint32_t value2=0;
+	for(int temp=0; temp<100; temp++){
+		value2 = value2 + value1[temp];
+	}
+	return value2/100;
 }
 
 uint32_t RTD_Checker(int RTD){
 	int PORT=0;
+	int dummy=0;
 	if(RTD==1)
 		PORT=RTD_PORT;
 	else if(RTD==2)
 		PORT=RTD_PORT2;
+	else if(RTD==3)
+		dummy=1;
 	else
 		PORT=PTC12;
 	uint32_t error_input[100];
@@ -100,9 +111,11 @@ uint32_t RTD_Checker(int RTD){
 		else if((delta_checker > 5 || delta_checker < -5) && RTD==2)
 			Error_Codes = Error_Codes+64;
 	}
+	return averager(error_input);
 }
 
 void CAN_Read(void){
+	FLEXCAN0_receive_msg();
 	for(int x=0; x<100000; x++);
 	if ((CAN0->IFLAG1 >> 4) & 1);
 	else
@@ -122,15 +135,6 @@ void Error_Checker(void){
 		Error_Codes = Error_Codes+128;
 }
 
-
-uint32_t averager(uint32_t value1[100]){
-	uint32_t value2=0;
-	for(int temp=0; temp<100; temp++){
-		value2 = value2 + value1[temp];
-	}
-	return value2/100;
-}
-
 void FLEXCAN0_Tester(void){
 	FLEXCAN0_transmit_msg_AVG(0xFFFFFFFF+1, -1); //Output should be 00 00 00 00 FF FF FF FF
 	FLEXCAN0_transmit_msg_AVG(123, 456); //Output should be 00 00 00 00 7B 00 00 01 C8
@@ -138,15 +142,19 @@ void FLEXCAN0_Tester(void){
 
 void averager_Tester(void){
 	uint32_t test1[100];
-	uint32_t limit = 4294967295;
+	uint32_t limit = 70000;
 	for(int tmp=0;tmp<100;tmp++)
 		test1[tmp]=limit;
 	uint32_t test2[100];
 	for(int tmp=0;tmp<100;tmp++){
 		test2[tmp]=tmp;
 	}
-	uint32_t test_1_avg = averager(test1); //Output should be 42949671
+	uint32_t test_1_avg = averager(test1); //Output should be 70000
 	uint32_t test_2_avg = averager(test2); //Output should be 49
+}
+
+void Error_Code_Tester(void){
+	uint32_t tester = RTD_Checker(3);
 }
 
 int main(void){
