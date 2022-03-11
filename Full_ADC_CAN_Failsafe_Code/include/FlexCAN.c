@@ -39,16 +39,12 @@ void FLEXCAN0_init(void) {
 		CAN0->RXIMR[i] = 0xFFFFFFFF; /* Check all ID bits for incoming messages */
 	}
 	CAN0->RXMGMASK = 0x1FFFFFFF; /* Global acceptance mask: check all ID bits */
-	CAN0->RAMn[ 4*MSG_BUF_SIZE + 0] = 0x04000000; /* Msg Buf 4, word 0: Enable for reception */
+	CAN0->RAMn[ 4*MSG_BUF_SIZE + 0] = 0x04200000; /* Msg Buf 4, word 0: Enable for reception */
 	/* EDL,BRS,ESI=0: CANFD not used */
 	/* CODE=4: MB set to RX inactive */
-	/* IDE=0: Standard ID */
+	/* IDE=1: Extended ID */
 	/* SRR, RTR, TIME STAMP = 0: not applicable */
-	#ifdef NODE_A /* Node A receives msg with std ID 0x511 */
-	CAN0->RAMn[ 4*MSG_BUF_SIZE + 1] = 0x14440000; /* Msg Buf 4, word 1: Standard ID = 0x111 */
-	#else /* Node B to receive msg with std ID 0x555 */
-	CAN0->RAMn[ 4*MSG_BUF_SIZE + 1] = 0x15540000; /* Msg Buf 4, word 1: Standard ID = 0x555 */
-	#endif
+	CAN0->RAMn[ 4*MSG_BUF_SIZE + 1] = 0x18FF3309; /* Msg Buf 4, word 1: AKA Message to look for */
 	/* PRIO = 0: CANFD not used */
 	CAN0->MCR = 0x0000001F; /* Negate FlexCAN 1 halt state for 32 MBs */
 	while ((CAN0->MCR && CAN_MCR_FRZACK_MASK) >> CAN_MCR_FRZACK_SHIFT) {}
@@ -64,7 +60,7 @@ void FLEXCAN0_transmit_msg_test(void) { /* Assumption: Message buffer CODE is IN
 	CAN0->RAMn[ 0*MSG_BUF_SIZE + 0] = 0x0C600000 | 8 <<CAN_WMBn_CS_DLC_SHIFT; /* MB0 word 0: */
 	/* EDL,BRS,ESI=0: CANFD not used */
 	/* CODE=0xC: Activate msg buf to transmit */
-	/* IDE=0: Standard ID */
+	/* IDE=1: Extended ID */
 	/* SRR=1 Tx frame (not req'd for std ID) */
 	/* RTR = 0: data, not remote tx request frame*/
 	/* DLC = 8 bytes */
@@ -77,7 +73,7 @@ void FLEXCAN0_transmit_msg_RTDs(uint32_t msg1, uint32_t msg2) { /* Assumption: M
 	CAN0->RAMn[ 0*MSG_BUF_SIZE + 0] = 0x0C600000 | 8 <<CAN_WMBn_CS_DLC_SHIFT; /* MB0 word 0: */
 	/* EDL,BRS,ESI=0: CANFD not used */
 	/* CODE=0xC: Activate msg buf to transmit */
-	/* IDE=0: Standard ID */
+	/* IDE=1: Extended ID */
 	/* SRR=1 Tx frame (not req'd for std ID) */
 	/* RTR = 0: data, not remote tx request frame*/
 	/* DLC = 8 bytes */
@@ -91,7 +87,7 @@ void FLEXCAN0_transmit_msg_AVG(uint32_t msg1, uint32_t msg2) { /* Assumption: Me
 	CAN0->RAMn[ 0*MSG_BUF_SIZE + 0] = 0x0C600000 | 8 <<CAN_WMBn_CS_DLC_SHIFT; /* MB0 word 0: */
 	/* EDL,BRS,ESI=0: CANFD not used */
 	/* CODE=0xC: Activate msg buf to transmit */
-	/* IDE=0: Standard ID */
+	/* IDE=1: Extended ID */
 	/* SRR=1 Tx frame (not req'd for std ID) */
 	/* RTR = 0: data, not remote tx request frame*/
 	/* DLC = 8 bytes */

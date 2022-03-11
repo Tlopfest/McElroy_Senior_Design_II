@@ -55,7 +55,8 @@ void Power_LED(int test){
 }
 
 uint32_t temp_finder(uint32_t voltage){
-	int temperature = slope*voltage+intercept; //Place for formula to find temperature
+	//int temperature = slope*voltage+intercept; //Place for formula to find temperature
+	int dummy = 0;
 }
 
 uint32_t averager(uint32_t value1[100]){
@@ -115,9 +116,13 @@ uint32_t RTD_Checker(int RTD){
 }
 
 void CAN_Read(void){
-	FLEXCAN0_receive_msg();
-	for(int x=0; x<100000; x++);
-	if ((CAN0->IFLAG1 >> 4) & 1);
+	uint16_t readable=0;
+	for(int x=0; x<100000; x++){
+		if ((CAN0->IFLAG1 >> 4) & 1)
+			readable = 1;
+	}
+	if (readable==1)
+		FLEXCAN0_receive_msg();
 	else
 		Error_Codes=Error_Codes+1;
 }
