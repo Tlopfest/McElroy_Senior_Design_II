@@ -25,6 +25,9 @@ uint32_t avg = 0;
 uint32_t final_input = 0;
 int counter = 0;
 uint32_t Error_Codes=0;
+uint32_t tmp_checker=0;
+uint32_t tmp_checker2=0;
+uint32_t error_input[100];
 
 void PORT_init (void) {
 	PCC->PCCn[PCC_PORTD_INDEX ]|=PCC_PCCn_CGC_MASK; /* Enable clock for PORTD */
@@ -56,7 +59,14 @@ void Power_LED(int test){
 
 uint32_t temp_finder(uint32_t voltage){
 	//int temperature = slope*voltage+intercept; //Place for formula to find temperature
-	int dummy = 0;
+	return voltage;
+}
+
+uint32_t ADC_Reader(uint32_t PORT){
+	convertAdcChan(PORT); /* Convert Channel PORT */ //WILL NEED TO SET CORRECT PORT LATER
+	while(adc_complete()==0){} /* Wait for conversion complete flag */
+	//error_input[counter] = temp_finder(read_adc_chx());
+	return temp_finder(read_adc_chx()); //Return voltage input in mv
 }
 
 uint32_t averager(uint32_t value1[100]){
@@ -69,24 +79,15 @@ uint32_t averager(uint32_t value1[100]){
 
 uint32_t RTD_Checker(int RTD){
 	int PORT=0;
-	int dummy=0;
 	if(RTD==1)
 		PORT=RTD_PORT;
 	else if(RTD==2)
 		PORT=RTD_PORT2;
-	else if(RTD==3)
-		dummy=1;
 	else
 		PORT=PTC12;
-	uint32_t error_input[100];
 	for(int counter=0; counter<100; counter++){
-		convertAdcChan(PORT); /* Convert Channel AD12 to pot on EVB */ //WILL NEED TO SET CORRECT PORT LATER
-		while(adc_complete()==0){} /* Wait for conversion complete flag */
-		//error_input[counter] = temp_finder(read_adc_chx());
-		error_input[counter]=read_adc_chx();
+		error_input[counter]=ADC_Reader(PORT);
 	}
-	uint32_t tmp_checker=0;
-	uint32_t tmp_checker2=0;
 	for(int counter2=0; counter2<100; counter2++){
 		if(error_input[counter2] > 700){
 			if(RTD==1 && tmp_checker==50)
@@ -135,6 +136,8 @@ void Error_Checker(void){
 	uint32_t RTD1_Check=RTD_Checker(0); //Check RTD1 temp value
 	//uint32_t RTD2_Check=RTD_Checker(RTD2); //Check RTD2 temp value
 	uint32_t RTD2_Check=RTD1_Check; //Temporary for dev board
+	if (RTD1_Check > 0xFFFFFFFF || RTD2_Check > 0xFFFFFFFF)
+		Error_Codes = Error_Codes+256;
 	int delta_checker=RTD1_Check-RTD2_Check;
 	if(delta_checker > 5 || delta_checker < -5)
 		Error_Codes = Error_Codes+128;
@@ -159,7 +162,9 @@ void averager_Tester(void){
 }
 
 void Error_Code_Tester(void){
-	uint32_t tester = RTD_Checker(3);
+	//uint32_t tester = RTD_Checker(1);
+	//uint32_t tester2 = RTD_Checker(2);
+	uint32_t tester3 = RTD_Checker(3);
 }
 
 int main(void){
@@ -172,12 +177,11 @@ int main(void){
 	ADC_init();
 	FLEXCAN0_Tester();
 	averager_Tester();
+	Error_Code_Tester();
 	Error_Checker();
 	for(;;) {
 		for(int Error_Counter=0; Error_Counter<10000; Error_Counter++){
-			convertAdcChan(12); /* Convert Channel AD12 to pot on EVB */ //WILL NEED TO SET CORRECT PORT LATER
-			while(adc_complete()==0){} /* Wait for conversion complete flag */
-			input_1[counter] = read_adc_chx();
+			input_1[counter]=ADC_Reader(12);
 			if (input_1[counter] > 3750) { /* If result > 3.75V */
 				PTD->PSOR |= 1<<PTD0 | 1<<PTD16; /* turn off blue, green LEDs */
 				PTD->PCOR |= 1<<PTD15; /* turn on red LED */
