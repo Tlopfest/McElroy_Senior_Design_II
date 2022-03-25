@@ -22,7 +22,8 @@ void FLEXCAN0_init(void) {
 	CAN0->MCR &= ~CAN_MCR_MDIS_MASK; /* MDIS=0; Enable module config. (Sets FRZ, HALT)*/
 	while (!((CAN0->MCR & CAN_MCR_FRZACK_MASK) >> CAN_MCR_FRZACK_SHIFT)) {}
 	/* Good practice: wait for FRZACK=1 on freeze mode entry/exit */
-	CAN0->CTRL1 = 0x00DB0006; /* Configure for 500 KHz bit time */
+	CAN0->CTRL1 = 0x01F50001;
+	//CAN0->CTRL1 = 0x00DB0006; /* Configure for 500 KHz bit time */
 	/* Time quanta freq = 16 time quanta x 500 KHz bit time= 8MHz */
 	/* PRESDIV+1 = Fclksrc/Ftq = 8 MHz/8 MHz = 1 */
 	/* so PRESDIV = 0 */
