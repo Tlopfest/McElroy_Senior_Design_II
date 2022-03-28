@@ -57,9 +57,79 @@ void Power_LED(int test){
 	}
 }
 
-uint32_t temp_finder(uint32_t voltage){
+//double powerOfTen(int num){
+//     double rst = 1.0;
+//     if(num >= 0){
+//         for(int i = 0; i < num ; i++){
+//             rst *= 10.0;
+//         }
+//    }else{
+//        for(int i = 0; i < (0 - num ); i++){
+//            rst *= 0.1;
+//        }
+//    }
+//
+//    return rst;\
+//}
+//
+// double squareRoot(double a)
+// {
+//     /*
+//           find more detail of this method on wiki methods_of_computing_square_roots
+//
+//           *** Babylonian method cannot get exact zero but approximately value of the square_root
+//      */
+//      double z = a;
+//      double rst = 0.0;
+//     int max = 8;     // to define maximum digit
+//     int i;
+//     double j = 1.0;
+//     for(i = max ; i > 0 ; i--){
+//         // value must be bigger then 0
+//         if(z - (( 2 * rst ) + ( j * powerOfTen(i)))*( j * powerOfTen(i)) >= 0)
+//         {
+//             while( z - (( 2 * rst ) + ( j * powerOfTen(i)))*( j * powerOfTen(i)) >= 0)
+//             {
+//                 j++;
+//                 if(j >= 10) break;
+//             }
+//             j--; //correct the extra value by minus one to j
+//             z -= (( 2 * rst ) + ( j * powerOfTen(i)))*( j * powerOfTen(i)); //find value of z
+//             rst += j * powerOfTen(i);     // find sum of a
+//             j = 1.0;
+//           }
+//      }
+//
+//      for(i = 0 ; i >= 0 - max ; i--){
+//          if(z - (( 2 * rst ) + ( j * powerOfTen(i)))*( j * powerOfTen(i)) >= 0)
+//          {
+//              while( z - (( 2 * rst ) + ( j * powerOfTen(i)))*( j * powerOfTen(i)) >= 0)
+//              {
+//                  j++;
+//              }
+//              j--;
+//              z -= (( 2 * rst ) + ( j * powerOfTen(i)))*( j * powerOfTen(i)); //find value of z
+//              rst += j * powerOfTen(i);     // find sum of a
+//              j = 1.0;
+//           }
+//      }
+//      // find the number on each digit
+//      return rst;
+// }
+ uint32_t temp_finder(uint32_t voltage){
 	//int temperature = slope*voltage+intercept; //Place for formula to find temperature
-	return voltage;
+	//double m = 0.242692;
+	//double nx = -13030000;
+	//double ox = 76.7463;
+	//double b = 31622.8;
+	//double v = voltage/1000;
+	//double square_root = squareRoot(nx*(v-ox));
+	//uint32_t temperature = m*square_root-b;
+	double b = 463.87*1000;
+	double m = 244.48;
+	double v = voltage;
+	uint32_t temperature = (m*v-b)/1000;
+	return temperature;
 }
 
 uint32_t ADC_Reader(uint32_t PORT){
