@@ -11,6 +11,7 @@
 "./Project_Settings/Startup_Code/startup_S32K144.o"
 "./Project_Settings/Startup_Code/system_S32K144.o"
 "./include/ADC.o"
+"./include/ADC1.o"
 "./include/FlexCAN.o"
 "./include/clocks_and_modes.o"
 "./src/main.o"

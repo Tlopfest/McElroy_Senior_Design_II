@@ -6,12 +6,13 @@
 #include "clocks_and_modes.h"
 #include "ADC.h"
 #include "FlexCAN.h"
+#include "ADC1.h"
 
 int REF_VOLT = 5.1;
 int led = 0;
 
-#define RTD_PORT 10 //Change this when selecting ports for RTD.
-#define RTD_PORT2 11 //Same here
+#define RTD_PORT 12 //Change this when selecting ports for RTD.
+#define RTD_PORT2 7 //Same here
 
 uint32_t input_1[100];
 uint32_t input_2[100];
@@ -56,9 +57,18 @@ void WDOG_disable(void){
 }
 
 uint32_t ADC_Reader(uint32_t PORT){
-	convertAdcChan(PORT); /* Convert Channel PORT */
-	while(adc_complete()==0){} /* Wait for conversion complete flag */
-	return temp_finder(read_adc_chx()); //Return voltage input in mv
+	uint32_t result = 0;
+	if(PORT==RTD_PORT){
+	  convertAdcChan(PORT); /* Convert Channel PORT for ADC0*/
+	  while(adc_complete()==0){} /* Wait for conversion complete flag */
+	  result = temp_finder(read_adc_chx()); //Return voltage input in mv
+	}
+	else{
+	  convertAdcChan1(PORT); //Convert Chanel PORT for ADC1
+	  while(adc_complete1()==0){} //Wait for conversion complete flag
+	  result = temp_finder(read_adc_chx1()); //Return voltage input in mv
+	}
+	return result;
 }
 
 uint32_t averager(uint32_t value1[100]){
@@ -172,9 +182,10 @@ int main(void){
 	FLEXCAN0_init(); //Initialize CAN
 	PORT_init(); /* Init port clocks and gpio outputs */
 	ADC_init(); //Initialize ADC
-	FLEXCAN0_Tester(); //Test CAN
-	averager_Tester(); //Test Averager
-	Error_Code_Tester(); //Test Error Code
+	ADC1_init(); //Initialize ADC1
+	//FLEXCAN0_Tester(); //Test CAN
+	//averager_Tester(); //Test Averager
+	//Error_Code_Tester(); //Test Error Code
 	Error_Checker(); //Run first iteration of error checker
 	for(;;) {
 		for(int Error_Counter=0; Error_Counter<10000; Error_Counter++){

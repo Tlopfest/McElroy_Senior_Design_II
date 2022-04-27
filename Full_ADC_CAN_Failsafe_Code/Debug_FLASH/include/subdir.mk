@@ -5,16 +5,19 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../include/ADC.c \
+../include/ADC1.c \
 ../include/FlexCAN.c \
 ../include/clocks_and_modes.c 
 
 OBJS += \
 ./include/ADC.o \
+./include/ADC1.o \
 ./include/FlexCAN.o \
 ./include/clocks_and_modes.o 
 
 C_DEPS += \
 ./include/ADC.d \
+./include/ADC1.d \
 ./include/FlexCAN.d \
 ./include/clocks_and_modes.d 
 

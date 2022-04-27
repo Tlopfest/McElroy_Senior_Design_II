@@ -123,6 +123,27 @@ Discarded input sections
  .debug_macro   0x00000000       0x6a ./include/ADC.o
  .debug_macro   0x00000000      0x1df ./include/ADC.o
  .debug_macro   0x00000000     0xee82 ./include/ADC.o
+ .group         0x00000000        0x8 ./include/ADC1.o
+ .group         0x00000000        0x8 ./include/ADC1.o
+ .group         0x00000000        0x8 ./include/ADC1.o
+ .group         0x00000000        0x8 ./include/ADC1.o
+ .group         0x00000000        0x8 ./include/ADC1.o
+ .group         0x00000000        0x8 ./include/ADC1.o
+ .group         0x00000000        0x8 ./include/ADC1.o
+ .group         0x00000000        0x8 ./include/ADC1.o
+ .group         0x00000000        0x8 ./include/ADC1.o
+ .text          0x00000000        0x0 ./include/ADC1.o
+ .data          0x00000000        0x0 ./include/ADC1.o
+ .bss           0x00000000        0x0 ./include/ADC1.o
+ .debug_macro   0x00000000      0x8d4 ./include/ADC1.o
+ .debug_macro   0x00000000       0x19 ./include/ADC1.o
+ .debug_macro   0x00000000       0x22 ./include/ADC1.o
+ .debug_macro   0x00000000       0x87 ./include/ADC1.o
+ .debug_macro   0x00000000       0x51 ./include/ADC1.o
+ .debug_macro   0x00000000       0xef ./include/ADC1.o
+ .debug_macro   0x00000000       0x6a ./include/ADC1.o
+ .debug_macro   0x00000000      0x1df ./include/ADC1.o
+ .debug_macro   0x00000000     0xee82 ./include/ADC1.o
  .group         0x00000000        0x8 ./include/FlexCAN.o
  .group         0x00000000        0x8 ./include/FlexCAN.o
  .group         0x00000000        0x8 ./include/FlexCAN.o
@@ -184,6 +205,12 @@ Discarded input sections
  .data.REF_VOLT
                 0x00000000        0x4 ./src/main.o
  .bss.led       0x00000000        0x4 ./src/main.o
+ .text.FLEXCAN0_Tester
+                0x00000000       0x1c ./src/main.o
+ .text.averager_Tester
+                0x00000000       0x88 ./src/main.o
+ .text.Error_Code_Tester
+                0x00000000       0x16 ./src/main.o
  .debug_macro   0x00000000      0x8d4 ./src/main.o
  .debug_macro   0x00000000       0x19 ./src/main.o
  .debug_macro   0x00000000       0x22 ./src/main.o
@@ -255,6 +282,7 @@ LOAD ./Project_Settings/Startup_Code/startup.o
 LOAD ./Project_Settings/Startup_Code/startup_S32K144.o
 LOAD ./Project_Settings/Startup_Code/system_S32K144.o
 LOAD ./include/ADC.o
+LOAD ./include/ADC1.o
 LOAD ./include/FlexCAN.o
 LOAD ./include/clocks_and_modes.o
 LOAD ./src/main.o
@@ -289,7 +317,7 @@ LOAD /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/
  .FlashConfig   0x00000400       0x10 ./Project_Settings/Startup_Code/startup_S32K144.o
                 0x00000410                . = ALIGN (0x4)
 
-.text           0x00000410     0x163c
+.text           0x00000410     0x16a0
                 0x00000410                . = ALIGN (0x4)
  *(.text)
  .text          0x00000410       0xa4 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
@@ -474,168 +502,172 @@ LOAD /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/
  .text.read_adc_chx
                 0x00000f80       0x3c ./include/ADC.o
                 0x00000f80                read_adc_chx
+ .text.ADC1_init
+                0x00000fbc       0x68 ./include/ADC1.o
+                0x00000fbc                ADC1_init
+ .text.convertAdcChan1
+                0x00001024       0x30 ./include/ADC1.o
+                0x00001024                convertAdcChan1
+ .text.adc_complete1
+                0x00001054       0x20 ./include/ADC1.o
+                0x00001054                adc_complete1
+ .text.read_adc_chx1
+                0x00001074       0x3c ./include/ADC1.o
+                0x00001074                read_adc_chx1
  .text.FLEXCAN0_init
-                0x00000fbc       0xdc ./include/FlexCAN.o
-                0x00000fbc                FLEXCAN0_init
+                0x000010b0       0xdc ./include/FlexCAN.o
+                0x000010b0                FLEXCAN0_init
  .text.FLEXCAN0_transmit_msg_RTDs
-                0x00001098       0x48 ./include/FlexCAN.o
-                0x00001098                FLEXCAN0_transmit_msg_RTDs
+                0x0000118c       0x48 ./include/FlexCAN.o
+                0x0000118c                FLEXCAN0_transmit_msg_RTDs
  .text.FLEXCAN0_transmit_msg_AVG
-                0x000010e0       0x48 ./include/FlexCAN.o
-                0x000010e0                FLEXCAN0_transmit_msg_AVG
+                0x000011d4       0x48 ./include/FlexCAN.o
+                0x000011d4                FLEXCAN0_transmit_msg_AVG
  .text.FLEXCAN0_receive_msg
-                0x00001128       0x94 ./include/FlexCAN.o
-                0x00001128                FLEXCAN0_receive_msg
+                0x0000121c       0x94 ./include/FlexCAN.o
+                0x0000121c                FLEXCAN0_receive_msg
  .text.SOSC_init_8MHz
-                0x000011bc       0x4c ./include/clocks_and_modes.o
-                0x000011bc                SOSC_init_8MHz
+                0x000012b0       0x4c ./include/clocks_and_modes.o
+                0x000012b0                SOSC_init_8MHz
  .text.SPLL_init_160MHz
-                0x00001208       0x64 ./include/clocks_and_modes.o
-                0x00001208                SPLL_init_160MHz
+                0x000012fc       0x64 ./include/clocks_and_modes.o
+                0x000012fc                SPLL_init_160MHz
  .text.NormalRUNmode_80MHz
-                0x0000126c       0x2c ./include/clocks_and_modes.o
-                0x0000126c                NormalRUNmode_80MHz
+                0x00001360       0x2c ./include/clocks_and_modes.o
+                0x00001360                NormalRUNmode_80MHz
  .text.PORT_init
-                0x00001298       0x3c ./src/main.o
-                0x00001298                PORT_init
+                0x0000138c       0x3c ./src/main.o
+                0x0000138c                PORT_init
  .text.WDOG_disable
-                0x000012d4       0x2c ./src/main.o
-                0x000012d4                WDOG_disable
+                0x000013c8       0x2c ./src/main.o
+                0x000013c8                WDOG_disable
+ *fill*         0x000013f4        0x4 
  .text.temp_finder
-                0x00001300       0x8c ./src/main.o
-                0x00001300                temp_finder
+                0x000013f8       0x8c ./src/main.o
+                0x000013f8                temp_finder
  .text.ADC_Reader
-                0x0000138c       0x34 ./src/main.o
-                0x0000138c                ADC_Reader
+                0x00001484       0x62 ./src/main.o
+                0x00001484                ADC_Reader
+ *fill*         0x000014e6        0x2 
  .text.averager
-                0x000013c0       0x48 ./src/main.o
-                0x000013c0                averager
+                0x000014e8       0x48 ./src/main.o
+                0x000014e8                averager
  .text.RTD_Checker
-                0x00001408      0x17c ./src/main.o
-                0x00001408                RTD_Checker
+                0x00001530      0x19c ./src/main.o
+                0x00001530                RTD_Checker
  .text.CAN_Read
-                0x00001584       0x5c ./src/main.o
-                0x00001584                CAN_Read
+                0x000016cc       0x5c ./src/main.o
+                0x000016cc                CAN_Read
  .text.Error_Checker
-                0x000015e0       0x54 ./src/main.o
-                0x000015e0                Error_Checker
- .text.FLEXCAN0_Tester
-                0x00001634       0x1c ./src/main.o
-                0x00001634                FLEXCAN0_Tester
- .text.averager_Tester
-                0x00001650       0x88 ./src/main.o
-                0x00001650                averager_Tester
- .text.Error_Code_Tester
-                0x000016d8       0x16 ./src/main.o
-                0x000016d8                Error_Code_Tester
- *fill*         0x000016ee        0x2 
- .text.main     0x000016f0      0x11c ./src/main.o
-                0x000016f0                main
- .text.exit     0x0000180c       0x20 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-exit.o)
-                0x0000180c                exit
+                0x00001728       0x54 ./src/main.o
+                0x00001728                Error_Checker
+ .text.main     0x0000177c       0xf4 ./src/main.o
+                0x0000177c                main
+ .text.exit     0x00001870       0x20 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-exit.o)
+                0x00001870                exit
  .text.__libc_init_array
-                0x0000182c       0x48 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-init.o)
-                0x0000182c                __libc_init_array
- .text.memset   0x00001874       0x10 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-memset.o)
-                0x00001874                memset
+                0x00001890       0x48 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-init.o)
+                0x00001890                __libc_init_array
+ .text.memset   0x000018d8       0x10 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-memset.o)
+                0x000018d8                memset
  .text.startup.register_fini
-                0x00001884       0x14 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__call_atexit.o)
+                0x000018e8       0x14 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__call_atexit.o)
  .text.__call_exitprocs
-                0x00001898       0xc8 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__call_atexit.o)
-                0x00001898                __call_exitprocs
+                0x000018fc       0xc8 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__call_atexit.o)
+                0x000018fc                __call_exitprocs
  .text.__libc_fini_array
-                0x00001960       0x28 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-fini.o)
-                0x00001960                __libc_fini_array
- .text.atexit   0x00001988        0xc /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-atexit.o)
-                0x00001988                atexit
+                0x000019c4       0x28 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-fini.o)
+                0x000019c4                __libc_fini_array
+ .text.atexit   0x000019ec        0xc /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-atexit.o)
+                0x000019ec                atexit
  .text.__register_exitproc
-                0x00001994       0x98 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__atexit.o)
-                0x00001994                __register_exitproc
- .text._exit    0x00001a2c        0x2 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libnosys.a(_exit.o)
-                0x00001a2c                _exit
+                0x000019f8       0x98 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__atexit.o)
+                0x000019f8                __register_exitproc
+ .text._exit    0x00001a90        0x2 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libnosys.a(_exit.o)
+                0x00001a90                _exit
  *(.rodata)
  *(.rodata*)
- *fill*         0x00001a2e        0x2 
+ *fill*         0x00001a92        0x2 
  .rodata._global_impure_ptr
-                0x00001a30        0x4 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-impure.o)
-                0x00001a30                _global_impure_ptr
+                0x00001a94        0x4 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-impure.o)
+                0x00001a94                _global_impure_ptr
  *(.glue_7)
- .glue_7        0x00001a34        0x0 linker stubs
+ .glue_7        0x00001a98        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x00001a34        0x0 linker stubs
+ .glue_7t       0x00001a98        0x0 linker stubs
  *(.eh_frame)
- .eh_frame      0x00001a34        0x0 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
+ .eh_frame      0x00001a98        0x0 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
  *(.init)
- .init          0x00001a34        0x4 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crti.o
-                0x00001a34                _init
- .init          0x00001a38        0x8 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
+ .init          0x00001a98        0x4 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crti.o
+                0x00001a98                _init
+ .init          0x00001a9c        0x8 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
  *(.fini)
- .fini          0x00001a40        0x4 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crti.o
-                0x00001a40                _fini
- .fini          0x00001a44        0x8 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
-                0x00001a4c                . = ALIGN (0x4)
+ .fini          0x00001aa4        0x4 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crti.o
+                0x00001aa4                _fini
+ .fini          0x00001aa8        0x8 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
+                0x00001ab0                . = ALIGN (0x4)
 
-.vfp11_veneer   0x00001a4c        0x0
- .vfp11_veneer  0x00001a4c        0x0 linker stubs
+.vfp11_veneer   0x00001ab0        0x0
+ .vfp11_veneer  0x00001ab0        0x0 linker stubs
 
-.v4_bx          0x00001a4c        0x0
- .v4_bx         0x00001a4c        0x0 linker stubs
+.v4_bx          0x00001ab0        0x0
+ .v4_bx         0x00001ab0        0x0 linker stubs
 
-.iplt           0x00001a4c        0x0
- .iplt          0x00001a4c        0x0 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
+.iplt           0x00001ab0        0x0
+ .iplt          0x00001ab0        0x0 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x00001a4c        0x8
-                0x00001a4c                __exidx_start = .
+.ARM            0x00001ab0        0x8
+                0x00001ab0                __exidx_start = .
  *(.ARM.exidx*)
- .ARM.exidx     0x00001a4c        0x8 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/crt0.o
-                0x00001a54                __exidx_end = .
+ .ARM.exidx     0x00001ab0        0x8 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/crt0.o
+                0x00001ab8                __exidx_end = .
 
-.rel.dyn        0x00001a54        0x0
- .rel.iplt      0x00001a54        0x0 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
+.rel.dyn        0x00001ab8        0x0
+ .rel.iplt      0x00001ab8        0x0 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
 
-.ctors          0x00001a54        0x0
-                0x00001a54                __CTOR_LIST__ = .
+.ctors          0x00001ab8        0x0
+                0x00001ab8                __CTOR_LIST__ = .
  *crtbegin.o(.ctors)
  *crtbegin?.o(.ctors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .ctors)
  *(SORT(.ctors.*))
  *(.ctors)
-                0x00001a54                __CTOR_END__ = .
+                0x00001ab8                __CTOR_END__ = .
 
-.dtors          0x00001a54        0x0
-                0x00001a54                __DTOR_LIST__ = .
+.dtors          0x00001ab8        0x0
+                0x00001ab8                __DTOR_LIST__ = .
  *crtbegin.o(.dtors)
  *crtbegin?.o(.dtors)
  *(EXCLUDE_FILE(*crtend.o *crtend?.o) .dtors)
  *(SORT(.dtors.*))
  *(.dtors)
-                0x00001a54                __DTOR_END__ = .
+                0x00001ab8                __DTOR_END__ = .
 
-.preinit_array  0x00001a54        0x0
-                0x00001a54                PROVIDE (__preinit_array_start, .)
+.preinit_array  0x00001ab8        0x0
+                0x00001ab8                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
-                0x00001a54                PROVIDE (__preinit_array_end, .)
+                0x00001ab8                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x00001a54        0x8
-                0x00001a54                PROVIDE (__init_array_start, .)
+.init_array     0x00001ab8        0x8
+                0x00001ab8                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  .init_array.00000
-                0x00001a54        0x4 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__call_atexit.o)
+                0x00001ab8        0x4 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__call_atexit.o)
  *(.init_array*)
- .init_array    0x00001a58        0x4 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
-                0x00001a5c                PROVIDE (__init_array_end, .)
+ .init_array    0x00001abc        0x4 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
+                0x00001ac0                PROVIDE (__init_array_end, .)
 
-.fini_array     0x00001a5c        0x4
-                0x00001a5c                PROVIDE (__fini_array_start, .)
+.fini_array     0x00001ac0        0x4
+                0x00001ac0                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
- .fini_array    0x00001a5c        0x4 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
-                0x00001a60                PROVIDE (__fini_array_end, .)
-                0x00001a60                __etext = .
-                0x00001a60                __DATA_ROM = .
+ .fini_array    0x00001ac0        0x4 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
+                0x00001ac4                PROVIDE (__fini_array_end, .)
+                0x00001ac4                __etext = .
+                0x00001ac4                __DATA_ROM = .
 
 .interrupts_ram
                 0x1fff8000      0x400
@@ -651,7 +683,7 @@ LOAD /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/
                 0x1fff8000                __VECTOR_RAM = DEFINED (__flash_vector_table__)?ORIGIN (m_interrupts):__VECTOR_RAM__
                 0x00000400                __RAM_VECTOR_TABLE_SIZE = DEFINED (__flash_vector_table__)?0x0:(__interrupts_ram_end__ - __interrupts_ram_start__)
 
-.data           0x1fff8400      0x41c load address 0x00001a60
+.data           0x1fff8400      0x41c load address 0x00001ac4
                 0x1fff8400                . = ALIGN (0x4)
                 0x1fff8400                __DATA_RAM = .
                 0x1fff8400                __data_start__ = .
@@ -664,20 +696,20 @@ LOAD /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/
  .jcr           0x1fff8818        0x4 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtend.o
                 0x1fff881c                . = ALIGN (0x4)
                 0x1fff881c                __data_end__ = .
-                0x00001e7c                __DATA_END = (__DATA_ROM + (__data_end__ - __data_start__))
-                0x00001e7c                __CODE_ROM = __DATA_END
+                0x00001ee0                __DATA_END = (__DATA_ROM + (__data_end__ - __data_start__))
+                0x00001ee0                __CODE_ROM = __DATA_END
 
 .tm_clone_table
-                0x1fff881c        0x0 load address 0x00001e7c
+                0x1fff881c        0x0 load address 0x00001ee0
  .tm_clone_table
                 0x1fff881c        0x0 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
  .tm_clone_table
                 0x1fff881c        0x0 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtend.o
 
-.igot.plt       0x1fff881c        0x0 load address 0x00001e7c
+.igot.plt       0x1fff881c        0x0 load address 0x00001ee0
  .igot.plt      0x1fff881c        0x0 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtbegin.o
 
-.code           0x1fff881c        0x0 load address 0x00001e7c
+.code           0x1fff881c        0x0 load address 0x00001ee0
                 0x1fff881c                . = ALIGN (0x4)
                 0x1fff881c                __CODE_RAM = .
                 0x1fff881c                __code_start__ = .
@@ -686,15 +718,15 @@ LOAD /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/
                 0x1fff881c                . = ALIGN (0x4)
                 0x1fff881c                __code_end__ = .
                 0x1fff881c                __code_ram_end__ = .
-                0x00001e7c                __CODE_END = (__CODE_ROM + (__code_end__ - __code_start__))
-                0x00001e7c                __CUSTOM_ROM = __CODE_END
+                0x00001ee0                __CODE_END = (__CODE_ROM + (__code_end__ - __code_start__))
+                0x00001ee0                __CUSTOM_ROM = __CODE_END
 
 .customSectionBlock
-                0x20000000        0x0 load address 0x00001e7c
+                0x20000000        0x0 load address 0x00001ee0
                 0x20000000                __customSection_start__ = .
  *(.customSection)
                 0x20000000                __customSection_end__ = .
-                0x00001e7c                __CUSTOM_END = (__CUSTOM_ROM + (__customSection_end__ - __customSection_start__))
+                0x00001ee0                __CUSTOM_END = (__CUSTOM_ROM + (__customSection_end__ - __customSection_start__))
 
 .bss            0x20000000      0x504
                 0x20000000                . = ALIGN (0x4)
@@ -787,39 +819,41 @@ LOAD /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/
  .ARM.attributes
                 0x000000e9       0x33 ./include/ADC.o
  .ARM.attributes
-                0x0000011c       0x33 ./include/FlexCAN.o
+                0x0000011c       0x33 ./include/ADC1.o
  .ARM.attributes
-                0x0000014f       0x33 ./include/clocks_and_modes.o
+                0x0000014f       0x33 ./include/FlexCAN.o
  .ARM.attributes
-                0x00000182       0x33 ./src/main.o
+                0x00000182       0x33 ./include/clocks_and_modes.o
  .ARM.attributes
-                0x000001b5       0x1e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/libgcc.a(_arm_addsubdf3.o)
+                0x000001b5       0x33 ./src/main.o
  .ARM.attributes
-                0x000001d3       0x1e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/libgcc.a(_arm_muldivdf3.o)
+                0x000001e8       0x1e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/libgcc.a(_arm_addsubdf3.o)
  .ARM.attributes
-                0x000001f1       0x1e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/libgcc.a(_arm_fixunsdfsi.o)
+                0x00000206       0x1e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/libgcc.a(_arm_muldivdf3.o)
  .ARM.attributes
-                0x0000020f       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-exit.o)
+                0x00000224       0x1e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/libgcc.a(_arm_fixunsdfsi.o)
  .ARM.attributes
-                0x0000023d       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-impure.o)
+                0x00000242       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-exit.o)
  .ARM.attributes
-                0x0000026b       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-init.o)
+                0x00000270       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-impure.o)
  .ARM.attributes
-                0x00000299       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-memset.o)
+                0x0000029e       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-init.o)
  .ARM.attributes
-                0x000002c7       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__call_atexit.o)
+                0x000002cc       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-memset.o)
  .ARM.attributes
-                0x000002f5       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-fini.o)
+                0x000002fa       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__call_atexit.o)
  .ARM.attributes
-                0x00000323       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-atexit.o)
+                0x00000328       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-fini.o)
  .ARM.attributes
-                0x00000351       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__atexit.o)
+                0x00000356       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-atexit.o)
  .ARM.attributes
-                0x0000037f       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libnosys.a(_exit.o)
+                0x00000384       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__atexit.o)
  .ARM.attributes
-                0x000003ad       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtend.o
+                0x000003b2       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libnosys.a(_exit.o)
  .ARM.attributes
-                0x000003db       0x1e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
+                0x000003e0       0x2e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtend.o
+ .ARM.attributes
+                0x0000040e       0x1e /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtn.o
                 0x00000001                ASSERT ((__StackLimit >= __HeapLimit), region m_data_2 overflowed with stack and heap)
 OUTPUT(Full_ADC_CAN_Failsafe_Code.elf elf32-littlearm)
 
@@ -829,30 +863,33 @@ OUTPUT(Full_ADC_CAN_Failsafe_Code.elf elf32-littlearm)
  .comment       0x000000a0       0xa1 ./Project_Settings/Startup_Code/startup.o
  .comment       0x000000a0       0xa1 ./Project_Settings/Startup_Code/system_S32K144.o
  .comment       0x000000a0       0xa1 ./include/ADC.o
+ .comment       0x000000a0       0xa1 ./include/ADC1.o
  .comment       0x000000a0       0xa1 ./include/FlexCAN.o
  .comment       0x000000a0       0xa1 ./include/clocks_and_modes.o
  .comment       0x000000a0       0xa1 ./src/main.o
  .comment       0x000000a0       0xa1 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/crtend.o
 
-.debug_info     0x00000000     0x1e1a
+.debug_info     0x00000000     0x21c5
  .debug_info    0x00000000      0x471 ./Project_Settings/Startup_Code/startup.o
  .debug_info    0x00000471       0x26 ./Project_Settings/Startup_Code/startup_S32K144.o
  .debug_info    0x00000497      0x522 ./Project_Settings/Startup_Code/system_S32K144.o
  .debug_info    0x000009b9      0x32e ./include/ADC.o
- .debug_info    0x00000ce7      0x567 ./include/FlexCAN.o
- .debug_info    0x0000124e      0x27f ./include/clocks_and_modes.o
- .debug_info    0x000014cd      0x94d ./src/main.o
+ .debug_info    0x00000ce7      0x32e ./include/ADC1.o
+ .debug_info    0x00001015      0x567 ./include/FlexCAN.o
+ .debug_info    0x0000157c      0x27f ./include/clocks_and_modes.o
+ .debug_info    0x000017fb      0x9ca ./src/main.o
 
-.debug_abbrev   0x00000000      0x748
+.debug_abbrev   0x00000000      0x887
  .debug_abbrev  0x00000000      0x108 ./Project_Settings/Startup_Code/startup.o
  .debug_abbrev  0x00000108       0x14 ./Project_Settings/Startup_Code/startup_S32K144.o
  .debug_abbrev  0x0000011c      0x125 ./Project_Settings/Startup_Code/system_S32K144.o
  .debug_abbrev  0x00000241      0x125 ./include/ADC.o
- .debug_abbrev  0x00000366      0x14e ./include/FlexCAN.o
- .debug_abbrev  0x000004b4       0xc2 ./include/clocks_and_modes.o
- .debug_abbrev  0x00000576      0x1d2 ./src/main.o
+ .debug_abbrev  0x00000366      0x125 ./include/ADC1.o
+ .debug_abbrev  0x0000048b      0x14e ./include/FlexCAN.o
+ .debug_abbrev  0x000005d9       0xc2 ./include/clocks_and_modes.o
+ .debug_abbrev  0x0000069b      0x1ec ./src/main.o
 
-.debug_aranges  0x00000000      0x198
+.debug_aranges  0x00000000      0x1d0
  .debug_aranges
                 0x00000000       0x20 ./Project_Settings/Startup_Code/startup.o
  .debug_aranges
@@ -862,21 +899,24 @@ OUTPUT(Full_ADC_CAN_Failsafe_Code.elf elf32-littlearm)
  .debug_aranges
                 0x00000070       0x38 ./include/ADC.o
  .debug_aranges
-                0x000000a8       0x48 ./include/FlexCAN.o
+                0x000000a8       0x38 ./include/ADC1.o
  .debug_aranges
-                0x000000f0       0x30 ./include/clocks_and_modes.o
+                0x000000e0       0x48 ./include/FlexCAN.o
  .debug_aranges
-                0x00000120       0x78 ./src/main.o
+                0x00000128       0x30 ./include/clocks_and_modes.o
+ .debug_aranges
+                0x00000158       0x78 ./src/main.o
 
-.debug_ranges   0x00000000      0x118
+.debug_ranges   0x00000000      0x140
  .debug_ranges  0x00000000       0x10 ./Project_Settings/Startup_Code/startup.o
  .debug_ranges  0x00000010       0x20 ./Project_Settings/Startup_Code/system_S32K144.o
  .debug_ranges  0x00000030       0x28 ./include/ADC.o
- .debug_ranges  0x00000058       0x38 ./include/FlexCAN.o
- .debug_ranges  0x00000090       0x20 ./include/clocks_and_modes.o
- .debug_ranges  0x000000b0       0x68 ./src/main.o
+ .debug_ranges  0x00000058       0x28 ./include/ADC1.o
+ .debug_ranges  0x00000080       0x38 ./include/FlexCAN.o
+ .debug_ranges  0x000000b8       0x20 ./include/clocks_and_modes.o
+ .debug_ranges  0x000000d8       0x68 ./src/main.o
 
-.debug_macro    0x00000000    0x1fa8a
+.debug_macro    0x00000000    0x1fb0a
  .debug_macro   0x00000000       0xb5 ./Project_Settings/Startup_Code/startup.o
  .debug_macro   0x000000b5      0x8d4 ./Project_Settings/Startup_Code/startup.o
  .debug_macro   0x00000989       0x22 ./Project_Settings/Startup_Code/startup.o
@@ -896,20 +936,22 @@ OUTPUT(Full_ADC_CAN_Failsafe_Code.elf elf32-littlearm)
  .debug_macro   0x000109ca     0xee82 ./Project_Settings/Startup_Code/system_S32K144.o
  .debug_macro   0x0001f84c       0x28 ./Project_Settings/Startup_Code/system_S32K144.o
  .debug_macro   0x0001f874       0x7c ./include/ADC.o
- .debug_macro   0x0001f8f0       0x82 ./include/FlexCAN.o
- .debug_macro   0x0001f972       0x7c ./include/clocks_and_modes.o
- .debug_macro   0x0001f9ee       0x9c ./src/main.o
+ .debug_macro   0x0001f8f0       0x7c ./include/ADC1.o
+ .debug_macro   0x0001f96c       0x82 ./include/FlexCAN.o
+ .debug_macro   0x0001f9ee       0x7c ./include/clocks_and_modes.o
+ .debug_macro   0x0001fa6a       0xa0 ./src/main.o
 
-.debug_line     0x00000000     0x14b9
+.debug_line     0x00000000     0x1755
  .debug_line    0x00000000      0x35d ./Project_Settings/Startup_Code/startup.o
  .debug_line    0x0000035d       0x91 ./Project_Settings/Startup_Code/startup_S32K144.o
  .debug_line    0x000003ee      0x37a ./Project_Settings/Startup_Code/system_S32K144.o
  .debug_line    0x00000768      0x29a ./include/ADC.o
- .debug_line    0x00000a02      0x331 ./include/FlexCAN.o
- .debug_line    0x00000d33      0x2ce ./include/clocks_and_modes.o
- .debug_line    0x00001001      0x4b8 ./src/main.o
+ .debug_line    0x00000a02      0x29b ./include/ADC1.o
+ .debug_line    0x00000c9d      0x331 ./include/FlexCAN.o
+ .debug_line    0x00000fce      0x2ce ./include/clocks_and_modes.o
+ .debug_line    0x0000129c      0x4b9 ./src/main.o
 
-.debug_str      0x00000000    0x69d1b
+.debug_str      0x00000000    0x69d80
  .debug_str     0x00000000    0x69538 ./Project_Settings/Startup_Code/startup.o
                               0x69760 (size before relaxing)
  .debug_str     0x00069538       0x3f ./Project_Settings/Startup_Code/startup_S32K144.o
@@ -918,28 +960,31 @@ OUTPUT(Full_ADC_CAN_Failsafe_Code.elf elf32-littlearm)
                               0x69539 (size before relaxing)
  .debug_str     0x0006976a      0x107 ./include/ADC.o
                               0x63928 (size before relaxing)
- .debug_str     0x00069871      0x225 ./include/FlexCAN.o
+ .debug_str     0x00069871       0x48 ./include/ADC1.o
+                              0x6392d (size before relaxing)
+ .debug_str     0x000698b9      0x225 ./include/FlexCAN.o
                               0x63a82 (size before relaxing)
- .debug_str     0x00069a96       0x67 ./include/clocks_and_modes.o
+ .debug_str     0x00069ade       0x67 ./include/clocks_and_modes.o
                               0x63945 (size before relaxing)
- .debug_str     0x00069afd      0x21e ./src/main.o
-                              0x63bf8 (size before relaxing)
+ .debug_str     0x00069b45      0x23b ./src/main.o
+                              0x63c52 (size before relaxing)
 
-.debug_frame    0x00000000      0x6fc
+.debug_frame    0x00000000      0x79c
  .debug_frame   0x00000000       0x38 ./Project_Settings/Startup_Code/startup.o
  .debug_frame   0x00000038       0x80 ./Project_Settings/Startup_Code/system_S32K144.o
  .debug_frame   0x000000b8       0xa0 ./include/ADC.o
- .debug_frame   0x00000158       0xf8 ./include/FlexCAN.o
- .debug_frame   0x00000250       0x70 ./include/clocks_and_modes.o
- .debug_frame   0x000002c0      0x1b4 ./src/main.o
- .debug_frame   0x00000474       0xac /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/libgcc.a(_arm_addsubdf3.o)
- .debug_frame   0x00000520       0x50 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/libgcc.a(_arm_muldivdf3.o)
- .debug_frame   0x00000570       0x24 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/libgcc.a(_arm_fixunsdfsi.o)
- .debug_frame   0x00000594       0x28 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-exit.o)
- .debug_frame   0x000005bc       0x2c /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-init.o)
- .debug_frame   0x000005e8       0x20 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-memset.o)
- .debug_frame   0x00000608       0x4c /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__call_atexit.o)
- .debug_frame   0x00000654       0x38 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-fini.o)
- .debug_frame   0x0000068c       0x20 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-atexit.o)
- .debug_frame   0x000006ac       0x30 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__atexit.o)
- .debug_frame   0x000006dc       0x20 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libnosys.a(_exit.o)
+ .debug_frame   0x00000158       0xa0 ./include/ADC1.o
+ .debug_frame   0x000001f8       0xf8 ./include/FlexCAN.o
+ .debug_frame   0x000002f0       0x70 ./include/clocks_and_modes.o
+ .debug_frame   0x00000360      0x1b4 ./src/main.o
+ .debug_frame   0x00000514       0xac /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/libgcc.a(_arm_addsubdf3.o)
+ .debug_frame   0x000005c0       0x50 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/libgcc.a(_arm_muldivdf3.o)
+ .debug_frame   0x00000610       0x24 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/bin/../lib/gcc/arm-none-eabi/6.3.1/thumb/v7e-m/libgcc.a(_arm_fixunsdfsi.o)
+ .debug_frame   0x00000634       0x28 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-exit.o)
+ .debug_frame   0x0000065c       0x2c /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-init.o)
+ .debug_frame   0x00000688       0x20 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-memset.o)
+ .debug_frame   0x000006a8       0x4c /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__call_atexit.o)
+ .debug_frame   0x000006f4       0x38 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-fini.o)
+ .debug_frame   0x0000072c       0x20 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-atexit.o)
+ .debug_frame   0x0000074c       0x30 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libc.a(lib_a-__atexit.o)
+ .debug_frame   0x0000077c       0x20 /home/tlopfest/NXP/S32DS.3.4/S32DS/build_tools/gcc_v6.3/gcc-6.3-arm32-eabi/arm-none-eabi/newlib/lib/thumb/v7e-m/libnosys.a(_exit.o)
